@@ -14,6 +14,10 @@ import FP from '../images/fotoprofile.png'
 import Profile from '../images/profile.png'
 import Cart from '../images/cart.png'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Product from '../images/product.png'
+import { Link } from 'react-router-dom'
+
+import { useNavigate } from 'react-router-dom'
 
 const Navigation = (props) => {
   const [isLoggedin, setIsLoggedin] = useState(false)
@@ -28,7 +32,7 @@ const Navigation = (props) => {
   return (
     <Navbar style={{ backgroundColor: '#FFC700' }} expand="lg">
       <Container>
-        <Navbar.Brand href="#">
+        <Navbar.Brand href="/">
           <img
             src={Icon}
             width="125"
@@ -37,6 +41,7 @@ const Navigation = (props) => {
             alt="ok"
           />
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -56,10 +61,26 @@ const Navigation = (props) => {
 }
 
 function PrivatePage(props) {
+  const navigate = useNavigate()
+  const handleProfile = (e) => {
+    e.preventDefault()
+    navigate('/Profile')
+  }
+  const handleAddproduk = (e) => {
+    e.preventDefault()
+    navigate('/Addproduk')
+  }
   return (
     <div className="d-flex">
-      <div>
-        <img className="me-4 mt-3" src={Cart} alt="" />
+      <Link to="/Cardorder">
+        <div>
+          <img className="me-4 mt-3" src={Cart} alt="" />
+        </div>
+      </Link>
+      <div class=" position-relative" style={{ top: '25px', right: '17px' }}>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle  bg-danger">
+          +2 <span class="visually-hidden"></span>
+        </span>
       </div>
 
       <Dropdown>
@@ -67,10 +88,16 @@ function PrivatePage(props) {
           <img src={FP} alt="" />
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item>
+          <Dropdown.Item onClick={handleProfile}>
             <img style={{ marginRight: '5px' }} src={Profile} alt="" />
             Profile
           </Dropdown.Item>
+
+          <Dropdown.Item onClick={handleAddproduk}>
+            <img style={{ marginRight: '5px' }} src={Product} alt="" />
+            Add Product
+          </Dropdown.Item>
+
           <Dropdown.Item onClick={props.logout}>
             <img style={{ marginRight: '5px' }} src={Export} alt="" />
             Logout
@@ -90,13 +117,16 @@ function GuestPage(props) {
   const handleShow1 = () => updateShow(true)
   return (
     <div>
-      <div className="me-2">
-        <button className="btn btn-dark  px-5" onClick={handleShow1}>
-          Register
-        </button>
-        <button className="btn btn-dark px-5" onClick={handleShow}>
-          Login
-        </button>
+      <div>
+        <div>
+          <button className="btn btn-dark  px-5 me-3" onClick={handleShow1}>
+            Register
+          </button>
+
+          <button className="btn btn-dark px-5" onClick={handleShow}>
+            Login
+          </button>
+        </div>
         <Modal show={show1} onHide={handleClose1}>
           <Modal.Header closeButton>
             <Modal.Title>

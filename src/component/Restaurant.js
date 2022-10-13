@@ -2,6 +2,7 @@ import BK from '../images/BK.png'
 import Sbux from '../images/sbux.png'
 import KFC from '../images/kfc.png'
 import Jco from '../images/jco.png'
+import { Link } from 'react-router-dom'
 
 function Restaurant() {
   return (
@@ -12,16 +13,21 @@ function Restaurant() {
       <div className="d-flex justify-content-evenly ">
         <div
           className="my-5 p-3 rounded"
-          style={{ backgroundColor: 'silver', width: '23%' }}
+          style={{
+            backgroundColor: 'white',
+            width: '23%',
+          }}
         >
-          <img src={BK} alt="bk" />
-          <span className="fw-bold ms-3" style={{ fontSize: '18px' }}>
-            Burger King
-          </span>
+          <Link to="/Burger">
+            <img src={BK} alt="bk" />
+            <span className="fw-bold ms-3" style={{ fontSize: '18px' }}>
+              Burger King
+            </span>
+          </Link>
         </div>
         <div
           className="my-5 p-3 rounded"
-          style={{ backgroundColor: 'silver', width: '23%' }}
+          style={{ backgroundColor: 'white', width: '23%' }}
         >
           <img src={Sbux} alt="bk" />
           <span className="fw-bold ms-3" style={{ fontSize: '18px' }}>
@@ -30,7 +36,7 @@ function Restaurant() {
         </div>
         <div
           className="my-5 p-3 rounded"
-          style={{ backgroundColor: 'silver', width: '23%' }}
+          style={{ backgroundColor: 'white', width: '23%' }}
         >
           <img src={KFC} alt="bk" />
           <span className="fw-bold ms-3" style={{ fontSize: '18px' }}>
@@ -39,7 +45,7 @@ function Restaurant() {
         </div>
         <div
           className="my-5 p-3 rounded"
-          style={{ backgroundColor: 'silver', width: '23%' }}
+          style={{ backgroundColor: 'white', width: '23%' }}
         >
           <img src={Jco} alt="bk" />
           <span className="fw-bold ms-3" style={{ fontSize: '18px' }}>

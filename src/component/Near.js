@@ -3,6 +3,7 @@ import Nasgor from '../images/nasgor.png'
 import Pecel from '../images/pecel.png'
 import Kopi from '../images/kopi.png'
 import Card from 'react-bootstrap/Card'
+import { Link } from 'react-router-dom'
 
 function Near() {
   return (
@@ -20,13 +21,19 @@ function Near() {
             }}
           >
             <Card.Body>
-              <Card.Img variant="top" src={Geprek} />
+              <Link
+                to="/Menu"
+                style={{ textDecoration: 'none', textColor: 'none' }}
+              >
+                <Card.Img variant="top" src={Geprek} />
+              </Link>
               <Card.Title
                 className="my-3 fw-bold"
                 style={{ fontSize: '15px ' }}
               >
                 Geprek Bensu
               </Card.Title>
+
               <Card.Subtitle className=" text-muted">0,2 KM</Card.Subtitle>
             </Card.Body>
           </Card>
@@ -40,7 +47,12 @@ function Near() {
             }}
           >
             <Card.Body>
-              <Card.Img variant="top" src={Nasgor} />
+              <Link
+                to="/Menu1"
+                style={{ textDecoration: 'none', textColor: 'none' }}
+              >
+                <Card.Img variant="top" src={Nasgor} />
+              </Link>
               <Card.Title
                 className="my-3 fw-bold "
                 style={{ fontSize: '15px ' }}
@@ -60,7 +72,12 @@ function Near() {
             }}
           >
             <Card.Body>
-              <Card.Img variant="top" src={Pecel} />
+              <Link
+                to="/Menu2"
+                style={{ textDecoration: 'none', textColor: 'none' }}
+              >
+                <Card.Img variant="top" src={Pecel} />
+              </Link>
               <Card.Title
                 className="my-3 fw-bold"
                 style={{ fontSize: '15px ' }}
@@ -80,7 +97,12 @@ function Near() {
             }}
           >
             <Card.Body>
-              <Card.Img variant="top" src={Kopi} />
+              <Link
+                to="/Menu3"
+                style={{ textDecoration: 'none', textColor: 'none' }}
+              >
+                <Card.Img variant="top" src={Kopi} />
+              </Link>
               <Card.Title
                 className="my-3 fw-bold"
                 style={{
