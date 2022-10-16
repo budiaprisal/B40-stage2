@@ -9,14 +9,14 @@ function Profile() {
   return (
     <div style={{ backgroundColor: '#E5E5E5', height: '100vh' }}>
       <Container className="d-flex justify-content-center align-items-center mx-auto">
-        <div className="m-5" style={{ width: '80%' }}>
+        <div className="m-5" style={{ width: '100%' }}>
           <div className="d-flex justify-content-between">
             <div className="d-flex">
               <div className="d-flex flex-column">
-                <h3 className="fw-bold mb-4">My Profile</h3>
+                <h3 className="fw-bold mb-4"> My Profile </h3>
 
-                <img src={PP1} width="150" alt="logo" className="mb-4" />
-                <Link to="/EditProfile">
+                <img src={PP1} width="250px" alt="logo" className="mb-4" />
+                <Link to="/EditUser">
                   <Button
                     style={{ backgroundColor: '#433434', border: 'none' }}
                   >
@@ -24,7 +24,7 @@ function Profile() {
                   </Button>
                 </Link>
               </div>
-              <div className="ms-4" style={{ marginTop: '55px' }}>
+              <div className="ms-4 " style={{ marginTop: '100px' }}>
                 <h5 style={{ color: '#613D2B' }}>Full Name</h5>
                 <p style={{ marginTop: '-12px' }}>Andi</p>
                 <h5 style={{ color: '#613D2B' }}>Email</h5>

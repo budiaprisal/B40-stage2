@@ -10,7 +10,9 @@ import Register from '../images/Register.png'
 import Login from '../images/Login.png'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Export from '../images/export.png'
+
 import FP from '../images/fotoprofile.png'
+import Partner from '../images/partner.png'
 import Profile from '../images/profile.png'
 import Cart from '../images/cart.png'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -21,27 +23,22 @@ import { useNavigate } from 'react-router-dom'
 
 const Navigation = (props) => {
   const [isLoggedin, setIsLoggedin] = useState(false)
-
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
-  const [show1, updateShow] = useState(false)
-  const handleClose1 = () => updateShow(false)
-  const handleShow1 = () => updateShow(true)
+  const [admin, setAdmin] = useState(false)
 
   return (
     <Navbar style={{ backgroundColor: '#FFC700' }} expand="lg">
       <Container>
-        <Navbar.Brand href="/">
-          <img
-            src={Icon}
-            width="125"
-            height="40"
-            className="d-inline-block align-top"
-            alt="ok"
-          />
+        <Navbar.Brand>
+          <Link to="/">
+            <img
+              src={Icon}
+              width="125"
+              height="40"
+              className="d-inline-block align-top"
+              alt="ok"
+            />
+          </Link>
         </Navbar.Brand>
-
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -50,9 +47,14 @@ const Navigation = (props) => {
             navbarScroll
           ></Nav>
           {isLoggedin ? (
-            <PrivatePage logout={() => setIsLoggedin(!isLoggedin)} />
+            <User logout={() => setIsLoggedin(!isLoggedin)} />
+          ) : admin ? (
+            <Admin logoutAdmin={() => setAdmin(!admin)} />
           ) : (
-            <GuestPage login={() => setIsLoggedin(!isLoggedin)} />
+            <GuestPage
+              login={() => setIsLoggedin(!isLoggedin)}
+              loginAdmin={() => setAdmin(!admin)}
+            />
           )}
         </Navbar.Collapse>
       </Container>
@@ -60,7 +62,9 @@ const Navigation = (props) => {
   )
 }
 
-function PrivatePage(props) {
+//LOGIN ADMIN
+
+function Admin(props) {
   const navigate = useNavigate()
   const handleProfile = (e) => {
     e.preventDefault()
@@ -72,20 +76,9 @@ function PrivatePage(props) {
   }
   return (
     <div className="d-flex">
-      <Link to="/Cardorder">
-        <div>
-          <img className="me-4 mt-3" src={Cart} alt="" />
-        </div>
-      </Link>
-      <div class=" position-relative" style={{ top: '25px', right: '17px' }}>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle  bg-danger">
-          +2 <span class="visually-hidden"></span>
-        </span>
-      </div>
-
       <Dropdown>
         <Dropdown.Toggle variant="transparent" id="dropdown-basic">
-          <img src={FP} alt="" />
+          <img src={Partner} alt="" />
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item onClick={handleProfile}>
@@ -98,7 +91,7 @@ function PrivatePage(props) {
             Add Product
           </Dropdown.Item>
 
-          <Dropdown.Item onClick={props.logout}>
+          <Dropdown.Item onClick={props.logoutAdmin}>
             <img style={{ marginRight: '5px' }} src={Export} alt="" />
             Logout
           </Dropdown.Item>
@@ -108,6 +101,8 @@ function PrivatePage(props) {
   )
 }
 
+//LOGIN ADMIN
+
 function GuestPage(props) {
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
@@ -115,6 +110,31 @@ function GuestPage(props) {
   const [show1, updateShow] = useState(false)
   const handleClose1 = () => updateShow(false)
   const handleShow1 = () => updateShow(true)
+
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  })
+
+  const account = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const submit = (e) => {
+    e.preventDefault()
+
+    if (form.email === 'admin@mail.com') {
+      return props.loginAdmin()
+    } else if (form.email === 'user@mail.com') {
+      return props.login()
+    } else {
+      alert('email salah')
+    }
+  }
+
   return (
     <div>
       <div>
@@ -213,7 +233,14 @@ function GuestPage(props) {
           <Form>
             <Form.Group className="mb-3">
               <Form.Label>Email </Form.Label>
-              <Form.Control type="email" placeholder="Email" autoFocus />
+              <Form.Control
+                name="email"
+                value={form.email}
+                onChange={account}
+                type="email"
+                placeholder="Email"
+                autoFocus
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
@@ -227,9 +254,9 @@ function GuestPage(props) {
 
             <Button
               className="mb-3 w-100"
+              onClick={submit}
               variant="dark"
               size="lg"
-              onClick={props.login}
             >
               Login
             </Button>
@@ -251,5 +278,57 @@ function GuestPage(props) {
     </div>
   )
 }
+
+// LOGIN USERR
+
+function User(props) {
+  const navigate = useNavigate()
+
+  const handleProfile = (e) => {
+    e.preventDefault()
+    navigate('/ProfileUser')
+  }
+  const handleAddproduk = (e) => {
+    e.preventDefault()
+    navigate('/Addproduk')
+  }
+
+  return (
+    <div className="d-flex">
+      <Link to="/Cardorder">
+        <div>
+          <img className="me-4 mt-3" src={Cart} alt="" />
+        </div>
+      </Link>
+      <div class=" position-relative" style={{ top: '25px', right: '17px' }}>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle  bg-danger">
+          2<span class="visually-hidden"></span>
+        </span>
+      </div>
+
+      <Dropdown>
+        <Dropdown.Toggle variant="transparent" id="dropdown-basic">
+          <img src={FP} alt="" />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={handleProfile}>
+            <img style={{ marginRight: '5px' }} src={Profile} alt="" />
+            Profile
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            onClick={() => {
+              props.logout()
+            }}
+          >
+            <img style={{ marginRight: '5px' }} src={Export} alt="" />
+            Logout
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </div>
+  )
+}
+// LOGIN USERR
 
 export default Navigation

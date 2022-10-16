@@ -5,21 +5,17 @@ import Bin from '../images/bin.png'
 import Plus from '../images/+.png'
 import Geprek from '../images/geprek.png'
 import Container from 'react-bootstrap/Container'
-
+import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import { useState } from 'react'
-import Kk from '../images/maps.png'
 import Modal from 'react-bootstrap/Modal'
 
-function Cardorder() {
+function Cardorder(props) {
   const [counter, setCounter] = useState(0)
-  const [counter1, setCounter1] = useState(0)
   const [qty, setQty] = useState(0)
-
   const [harga, setHarga] = useState(0)
-  const [harga1, setHarga1] = useState(0)
   const [subTotal, setSubTotal] = useState(0)
   const [total, setTotal] = useState(0)
 
@@ -27,16 +23,6 @@ function Cardorder() {
     return (
       setCounter(counter + 1),
       setHarga(harga + 15000),
-      setSubTotal(subTotal + 15000),
-      setQty(qty + 1),
-      setTotal(total + 15000)
-    )
-  }
-
-  function Add1() {
-    return (
-      setCounter1(counter1 + 1),
-      setHarga1(harga1 + 15000),
       setSubTotal(subTotal + 15000),
       setQty(qty + 1),
       setTotal(total + 15000)
@@ -64,18 +50,6 @@ function Cardorder() {
     setShow(true)
   }
 
-  function Less1() {
-    if (counter1 > 0) {
-      return (
-        setCounter1(counter1 - 1),
-        setHarga1(harga1 - 15000),
-        setSubTotal(subTotal - 15000),
-        setQty(qty - 1),
-        setTotal(total - 15000)
-      )
-    }
-  }
-
   function Delete() {
     return (
       setCounter(counter * 0),
@@ -83,16 +57,6 @@ function Cardorder() {
       setSubTotal(subTotal - 15000 * counter),
       setQty(qty - counter),
       setTotal(total - 15000 * counter)
-    )
-  }
-
-  function Delete1() {
-    return (
-      setCounter1(counter1 * 0),
-      setHarga1(harga1 * 0),
-      setSubTotal(subTotal - 15000 * counter1),
-      setQty(qty - counter1),
-      setTotal(total - 15000 * counter1)
     )
   }
 
@@ -122,11 +86,11 @@ function Cardorder() {
                   onClick={handleShow}
                   style={{
                     width: '20%',
-                    backgroundColor: '#433434',
+                    backgroundColor: '#433439',
                     border: 'none',
                   }}
                 >
-                  Select on map <img src={Map} alt="map"></img>
+                  Select on map <img src={Map} alt="map" />
                 </Button>
                 <>
                   {values.map((v, idx) => (
@@ -146,11 +110,11 @@ function Cardorder() {
                   >
                     <Modal.Header closeButton></Modal.Header>
                     <Modal.Body>
-                      <img
-                        src={Kk}
-                        alt="maps"
+                      <iframe
                         style={{ width: '100%', height: '100%' }}
-                      />
+                        src="https://maps.google.com/maps?q=Dumbways%20&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                        title="myFrame"
+                      ></iframe>{' '}
                     </Modal.Body>
                   </Modal>
                 </>
@@ -176,11 +140,9 @@ function Cardorder() {
 
                       <Button
                         style={{
-                          width: '0px',
-                          height: '0px',
-                          backgroundColor: '#EFEFEF',
+                          backgroundColor: '#E5E5E5',
                           border: 'none',
-                          marginTop: '-30px',
+                          marginTop: '0px',
                           marginLeft: '5px',
                           marginRight: '15px',
                         }}
@@ -193,12 +155,11 @@ function Cardorder() {
                       <span>{counter}</span>
                       <Button
                         style={{
-                          width: '0px',
-                          height: '0px',
-                          backgroundColor: '#EFEFEF',
+                          backgroundColor: '#E5E5E5',
+                          marginTop: '0px',
+                          marginLeft: '8px',
+                          marginRight: '15px',
                           border: 'none',
-                          marginTop: '-30px',
-                          marginLeft: '5px',
                         }}
                         onClick={() => {
                           Add()
@@ -223,81 +184,19 @@ function Cardorder() {
                   </div>
                 </div>
                 <hr style={{ opacity: '100%' }}></hr>
-                <div className="d-flex justify-content-between">
-                  <div className="d-flex">
-                    <img
-                      src={Geprek}
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                        objectFit: 'cover',
-                      }}
-                      alt="geprek"
-                    ></img>
-                    <div className="align-self-center">
-                      <p className="ms-3">Paket Geprek</p>
-
-                      <Button
-                        style={{
-                          width: '0px',
-                          height: '0px',
-                          backgroundColor: '#EFEFEF',
-                          border: 'none',
-                          marginTop: '-30px',
-                          marginLeft: '5px',
-                          marginRight: '15px',
-                        }}
-                        onClick={() => {
-                          Less1()
-                        }}
-                      >
-                        <img src={Minus} alt="geprek"></img>
-                      </Button>
-                      <span>{counter1}</span>
-                      <Button
-                        style={{
-                          width: '0px',
-                          height: '0px',
-                          backgroundColor: '#EFEFEF',
-                          border: 'none',
-                          marginTop: '-30px',
-                          marginLeft: '5px',
-                        }}
-                        onClick={() => {
-                          Add1()
-                        }}
-                      >
-                        <img src={Plus} alt="geprek"></img>
-                      </Button>
-                    </div>
-                  </div>
-                  <div className="d-flex align-items-center justify-content-end">
-                    <div>
-                      <p className="text-danger">Rp{harga1}</p>
-                      <img
-                        src={Bin}
-                        alt="sampah"
-                        className="ms-5"
-                        onClick={() => {
-                          Delete1()
-                        }}
-                      ></img>
-                    </div>
-                  </div>
-                </div>
-                <hr style={{ opacity: '100%' }}></hr>
               </div>
               <div style={{ width: '40%' }} className="ms-5 ">
                 <hr style={{ opacity: '100%' }}></hr>
                 <div className="d-flex justify-content-between">
                   <div>
                     <p>Subtotal</p>
-                    <p>Qty</p>
+                    <props>Qty</props>
                     <p>Ongkir</p>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <p className="text-danger">Rp{subTotal}</p>
+                    <p className="text-danger">Rp.{subTotal}</p>
                     <p>{qty}</p>
+
                     <p className="text-danger">Rp10.000</p>
                   </div>
                 </div>
